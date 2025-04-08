@@ -42,5 +42,9 @@ export default abstract class APage {
     async shouldLogoBeVisible(): Promise<void> {
         await expect(this.logoHeader).toBeVisible();
     }
+
+    async shouldUrlBe(url: string): Promise<void> {
+        await expect(this.page).toHaveURL(url);
+    }
     //#endregion
 }

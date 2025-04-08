@@ -2,11 +2,12 @@ import { test as baseTest, expect } from '@playwright/test';
 import HomePage from '../pages/HomePage';
 import { existsSync } from 'fs';
 import SignInPage from '../pages/SignInPage';
+import AccountPage from '../pages/AccountPage';
 
 interface Fixtures {
     homePage: HomePage;
     loginPage: SignInPage;
-    userToLogin?: string;
+    accountPage: AccountPage;
 }
 
 const test = baseTest.extend<Fixtures>({
@@ -22,6 +23,13 @@ const test = baseTest.extend<Fixtures>({
         await loginPage.open();
         await use(loginPage);
         await loginPage.close();
+    },
+
+    accountPage: async ({ page }, use) => {
+        const accountPage = new AccountPage(page);
+        await accountPage.open();
+        await use(accountPage);
+        await accountPage.close();
     },
 });
 
