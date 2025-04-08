@@ -1,4 +1,4 @@
-import { BASE_URL, USER_EMAIL, USER_PASSWORD } from '../playwright.config';
+import { USER_EMAIL, USER_PASSWORD } from '../playwright.config';
 import { test } from './fixtures';
 
 const PAGE_TITLE: RegExp = /Login - Practice Software Testing/;
