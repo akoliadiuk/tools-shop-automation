@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "A simple test framework, for https://practicesoftwaretesting.com/",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test-smoke-chromium": "playwright test --grep @smoke --project chromium"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.14.0",
+    "dotenv": "^16.4.7",
     "typescript": "^5.8.3"
   }
 }

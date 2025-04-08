@@ -1,14 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
 
-export const BASE_URL = 'https://practicesoftwaretesting.com/';
+// Load environment variables from .env file
+dotenv.config();
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+export const BASE_URL: string = getEnvVar('BASE_URL');
+export const USER_EMAIL: string = getEnvVar('USER_EMAIL');
+export const USER_PASSWORD: string = getEnvVar('USER_PASSWORD');
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -72,11 +70,12 @@ export default defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
+
+export function getEnvVar(name: string, defaultValue?: string): string {
+  const value = process.env[name];
+  if (value !== undefined) return value;
+  if (defaultValue !== undefined) return defaultValue;
+  
+  throw new Error(`Environment variable ${name} is missing.`);
+}
